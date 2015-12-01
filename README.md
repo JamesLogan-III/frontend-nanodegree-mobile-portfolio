@@ -3,17 +3,16 @@
 
 ### Optimizations
 
-1. updates to 'views/js/main.js'
+1. updates to `views/js/main.js`
 Based on the [FEND Office Hours](https://github.com/udacity/fend-office-hours/tree/master/Web%20Optimization/Effective%20Optimizations%20for%2060%20FPS)
-* refactored loops to remove duplicated or unessesary events form loops for the 'updatePositions()' and 'changePizzaSizes(size)' functions.
-* added 'getDomNodeArray(selector)' from [Instructor notes](https://www.udacity.com/course/viewer#!/c-ud860-nd/l-4147498575/e-4180748822/m-4166068889) in class to use forEachloops
-* removed the 'generateDX' function and rewrote the 'changePizzaSizes()' function to use the 'getDomNodeArray(selector)' function
-* rewrote the 'updatePositions()' function to use the 'getDomNodeArray(selector)', and use `translate3d()` instead of 'style.left'
-* added 'requestAnimation()' function per the [Animation Tutorial](http://www.html5rocks.com/en/tutorials/speed/animations/)
-* added 'onScroll()' and updated the event listener
-* added `backface-visibility: hidden` to the '.mover' class elements to use GPU painting
+* refactored loops to remove duplicated or unessesary events form loops for the `updatePositions()` and `changePizzaSizes(size)` functions.
+* added `getDomNodeArray(selector)` from [Instructor notes](https://www.udacity.com/course/viewer#!/c-ud860-nd/l-4147498575/e-4180748822/m-4166068889) in class to use forEachloops
+* removed the `generateDX` function and rewrote the `changePizzaSizes()` function to use the `getDomNodeArray(selector)` function
+* rewrote`requestAnimation()` function per the [Animation Tutorial @ HTML5ROCKS.com](http://www.html5rocks.com/en/tutorials/speed/animations/)
+* added `onScroll()` and updated the event listener
+* added `backface-visibility: hidden` to the `.mover` class elements to use GPU painting
 
-2. updates to 'index.html'
+2. updates to `index.html`
 * optimized images based on results from [Google Page Speed]
 * moved CSS and Javascript to end of file and switched to Async loads
 * minimized the HTML file
