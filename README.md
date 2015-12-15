@@ -3,7 +3,8 @@
 
 ### Optimizations
 
-1. updates to `views/js/main.js`
+## updates to `views/js/main.js`
+
 Based on the [FEND Office Hours](https://github.com/udacity/fend-office-hours/tree/master/Web%20Optimization/Effective%20Optimizations%20for%2060%20FPS)
 * refactored loops to remove duplicated or unessesary events form loops for the `updatePositions()` and `changePizzaSizes(size)` functions.
 * added `getDomNodeArray(selector)` from [Instructor notes](https://www.udacity.com/course/viewer#!/c-ud860-nd/l-4147498575/e-4180748822/m-4166068889) in class to use forEachloops
@@ -11,12 +12,29 @@ Based on the [FEND Office Hours](https://github.com/udacity/fend-office-hours/tr
 * rewrote`requestAnimation()` function per the [Animation Tutorial @ HTML5ROCKS.com](http://www.html5rocks.com/en/tutorials/speed/animations/)
 * added `onScroll()` and updated the event listener
 * added `backface-visibility: hidden` to the `.mover` class elements to use GPU painting
+* switched out `document.querySelector` for the better performing `document.getElementByID`
 
-2. updates to `index.html`
+## updates to `index.html`
+
 * optimized images based on results from [Google Page Speed]
 * moved CSS and Javascript to end of file and switched to Async loads
 * minimized the HTML file
 
+### Running the portfolio
+
+
+1. To inspect the site, you can run a local server, I use [WAMPServer](http://www.wampserver.com/en/)
+1. Check out the repository, into your webserver root folder, WAMPServer will pickup the folder automatically.
+1. Open a browser and visit localhost:<<PORT_NUMBER>>
+
+1. To use the Google Page Speed Insights site you will need to download and install [ngrok](https://ngrok.com/) to make your local server accessible remotely.
+
+  ``` bash
+  $> cd /path/to/your-project-folder
+  $> ngrok <<PORT_NUMBER>>
+  ```
+
+1. Copy the public URL ngrok gives you and try running it through PageSpeed Insights! Optional: [More on integrating ngrok, Grunt and PageSpeed.](http://www.jamescryer.com/2014/06/12/grunt-pagespeed-and-ngrok-locally-testing/)
 
 
 Your challenge, if you wish to accept it (and we sure hope you will), is to optimize this online portfolio for speed! In particular, optimize the critical rendering path and make this page render as quickly as possible by applying the techniques you've picked up in the [Critical Rendering Path course](https://www.udacity.com/course/ud884).

@@ -402,17 +402,17 @@ var pizzaElementGenerator = function(i) {
 var resizePizzas = function(size) {
   window.performance.mark("mark_start_resize");   // User Timing API function
 
-  // Changes the value for the size of the pizza above the slider
+  // Changes the value for the size of the pizza above the slider, switch to getElementByID instead of QuerySelector
   function changeSliderLabel(size) {
     switch(size) {
       case "1":
-        document.querySelector("#pizzaSize").innerHTML = "Small";
+        document.getElementById("pizzaSize").innerHTML = "Small";
         return;
       case "2":
-        document.querySelector("#pizzaSize").innerHTML = "Medium";
+        document.getElementById("pizzaSize").innerHTML = "Medium";
         return;
       case "3":
-        document.querySelector("#pizzaSize").innerHTML = "Large";
+        document.getElementById("pizzaSize").innerHTML = "Large";
         return;
       default:
         console.log("bug in changeSliderLabel");
@@ -440,7 +440,7 @@ var resizePizzas = function(size) {
     var pizzaContainers = getDomNodeArray(".randomPizzaContainer");
     pizzaContainers.forEach(function(elem, index, arr){
       elem.style.width = newwidth + "%";
-    })
+    });
   }
 
   changePizzaSizes(size);
@@ -505,7 +505,8 @@ function updatePositions() {
   // used translate3d to invoke the GPU,
   items.forEach(function(elem, index, arr){
     phase = Math.sin(lastTop + (index % 5));
-    elem.style.WebkitTransform = "translate3d(" + (elem.basicLeft + 100) * phase + "px, 0, 0)";
+    elem.style.WebkitTransform = "translate3d(" +  100 * phase + "px, 0, 0)";
+    elem.style.transform = "translate3d(" +  100 * phase + "px, 0, 0)";
     //console.log("phase = "+phase);
   })
 
@@ -561,21 +562,27 @@ window.addEventListener("scroll", onScroll, false);
 
 // Generates the sliding pizzas when the page loads.
 // Moved parentElement out of loop and used getElement by ID
-//Removed Variables for Cols and S
+// moved elem variable creation out of loop
+// adjusted loop size based on cols * (screenHeight/s)
 document.addEventListener("DOMContentLoaded", function() {
-  //var cols = 8;
-  //var s = 256;
+  var cols = 8;
+  var s = 256;
+  var screenHeight = window.screen.height;
+  var rows = screenHeight / s;
+  var pizzacounter = rows * cols;
   var parentElement = document.getElementById("movingPizzas1");
+  var elem;
 
-  for (var i = 0; i < 200; i++) {
-    var elem = document.createElement("img");
+  for (var i = 0; i < pizzacounter; i++) {
+    elem = document.createElement("img");
     elem.className = "mover";
     elem.src = "images/pizza.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
-    elem.basicLeft = (i % 8) * 256;
-    elem.style.top = (Math.floor(i / 8) * 256) + "px";
+    elem.style.left = ((i % cols) * 256) + "px";
+    elem.style.top = (Math.floor(i / cols) * 256) + "px";
     elem.style.WebkitBackfaceVisibility = "hidden";
+    elem.style.backfaceVisibility = "hidden";
     parentElement.appendChild(elem);
   }
   updatePositions();
